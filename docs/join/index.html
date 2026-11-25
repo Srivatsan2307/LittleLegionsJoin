@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Invitation - Little Legions</title>
+  <meta name="description" content="Open link in Little Legions or download the game.">
+  <meta property="og:title" content="Order Invitation - Little Legions">
+  <meta property="og:description" content="Open link in Little Legions or download the game.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://littlelegions.silverspectresoftware.com/join/">
+  <link rel="canonical" href="https://littlelegions.silverspectresoftware.com/join/">
+  <meta property="og:image" content="https://littlelegions.silverspectresoftware.com/assets/og.jpg">
+  <meta property="og:image:secure_url" content="https://littlelegions.silverspectresoftware.com/assets/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Little Legions">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Order Invitation - Little Legions">
+  <meta name="twitter:description" content="Open link in Little Legions or download the game.">
+  <meta name="twitter:image" content="https://littlelegions.silverspectresoftware.com/assets/og.jpg">
+  <style>
+    @font-face { font-family: Inter; src: url("/fonts/Inter-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: Inter; src: url("/fonts/Inter-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+    html, body { margin: 0; background: #07140c; color: #fff6e0; font-family: Inter, sans-serif; }
+    main { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; text-align: center; }
+    img { width: 100%; height: auto; border-radius: 12px; }
+    h1 { font-size: 28px; margin: 18px 0 8px; }
+    p { font-size: 16px; line-height: 1.4; }
+    a { display: inline-block; margin-top: 8px; padding: 12px 22px; border-radius: 10px;
+        background: #e7c56a; color: #1a120c; font-weight: 700; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="/assets/og.jpg" alt="Little Legions" width="1200" height="630">
+    <h1>Little Legions</h1>
+    <p id="line">Open this invite in the Little Legions app.</p>
+    <a id="open" href="littlelegions://join">Open Little Legions</a>
+  </main>
+  <script>
+    var params = new URLSearchParams(location.search);
+    var order = params.get('order') || '';
+    var token = params.get('token') || '';
+    var line = document.getElementById('line');
+    var open = document.getElementById('open');
+    if (!order || !token) {
+      line.textContent = 'This invite link is missing its Order.';
+      open.hidden = true;
+    } else {
+      var query = 'order=' + encodeURIComponent(order) + '&token=' + encodeURIComponent(token);
+      var scheme = 'littlelegions://join?' + query;
+      var intent = 'intent://join?' + query + '#Intent;scheme=littlelegions;package=com.silverspectre.littlelegions;end';
+      open.href = /Android/i.test(navigator.userAgent) ? intent : scheme;
+    }
+  </script>
+</body>
+</html>
